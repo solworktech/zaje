@@ -55,6 +55,10 @@ If you take this route, you'll need to copy the `highlight/syntax_files` and `ut
 ### Installing `super-zaje`
 
 `super-zaje` does everything `zaje` does but provides the additional functionality of extracting text from an image. 
+
+**NOTE**: `zaje` is capable of detecting the lexer to use based on the first line of text but with images, you'll often
+need to help it and specify a designated lexer by passing `-l $NAME` (e.g: `zaje -l sh`, `zaje -l server-log`, etc).
+
 It's a separate binary because it depends on the [gosseract](https://github.com/otiai10/gosseract) which in turn
 depends on `libtesseract` and requires its SOs to be available on the machine.
 
@@ -91,8 +95,17 @@ For example, try:
 $ ~/go/bin/super-zaje "https://github.com/jessp01/zaje/blob/master/testimg/go1.png?raw=true"
 ```
 
-**NOTE**: `zaje` is capable of detecting the lexer to use based on the first line of text but with images, you'll often
-need to help it and specify a designated lexer by passing `-l $NAME` (e.g: `zaje -l sh`, `zaje -l server-log`, etc).
+### PDF inputs
+
+PDF files are also supported. For example:
+
+```sh
+$ super-zaje --pdf  --pdf-page-number 63 FORTRAN_colouring_book.pdf
+```
+
+Will convert page **64** (page numbers start from 0 in [go-fitz](https://github.com/gen2brain/go-fitz) which is used by
+super-zaje) to a PNG and pass that on to [gosseract](https://github.com/otiai10/gosseract) for text extraction.
+
 
 
 ### ASCIInema screencast (Not a video!)
