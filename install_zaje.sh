@@ -47,13 +47,13 @@ GIT_BASE_DOMAIN="github.com"
 NAME="zaje"
 HIGHLIGHT_REPO_NAME="gohighlight"
 GH_SPACE="jessp01"
-LATEST_VER=$(curl -s "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$NAME/releases/latest"| grep tag_name|sed 's@\s*"tag_name": "\(.*\)".*@\1@')
+LATEST_VER=$(curl -sL "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$NAME/releases/latest"| grep tag_name|sed 's@\s*"tag_name": "\(.*\)".*@\1@')
 OS=$(uname)
 ARCH=$(uname -m)
 BIN_ARCHIVE="zaje_${OS}_${ARCH}.tar.gz"
 
 # we need this for the lexers
-LATEST_HIGHLIGHT_VER=$(curl -s "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$HIGHLIGHT_REPO_NAME/releases/latest"| grep tag_name|sed 's@\s*"tag_name": "\(.*\)".*@\1@')
+LATEST_HIGHLIGHT_VER=$(curl -sL "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$HIGHLIGHT_REPO_NAME/releases/latest"| grep tag_name|sed 's@\s*"tag_name": "\(.*\)".*@\1@')
 HIGHLIGHT_SOURCE_ARCHIVE="${LATEST_HIGHLIGHT_VER}.tar.gz"
 
 CONFIG_DIR="$HOME/.config/$NAME"
