@@ -95,12 +95,12 @@ For example, try:
 $ ~/go/bin/super-zaje "https://github.com/jessp01/zaje/blob/master/testimg/go1.png?raw=true"
 ```
 
-### PDF inputs
+#### PDF inputs
 
-PDF files are also supported. For example:
+PDF files are also supported by `super-zaje`. For example:
 
 ```sh
-$ super-zaje --pdf  --pdf-page-number 63 FORTRAN_colouring_book.pdf
+$ super-zaje --pdf  --pdf-page-number 63 /local/path/to/FORTRAN_colouring_book.pdf
 ```
 
 Will convert page **64** (page numbers start from 0 in [go-fitz](https://github.com/gen2brain/go-fitz) which is used by
