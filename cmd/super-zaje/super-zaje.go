@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"errors"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -11,12 +12,17 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/gen2brain/go-fitz"
 	"github.com/jessp01/zaje"
 	"github.com/otiai10/gosseract/v2"
 	"github.com/urfave/cli"
 )
 
 func main() {
+
+	var isPdf bool
+
+	var pdfPage int
 
 	app := cli.NewApp()
 	zaje.PopulateAppMetadata(app)
@@ -25,6 +31,20 @@ func main() {
 		Name:        "remove-line-numbers, rln",
 		Usage:       "Remove line numbers.\n",
 		Destination: &zaje.RemoveLineNumbers,
+	},
+	)
+
+	app.Flags = append(app.Flags, cli.BoolFlag{
+		Name:        "pdf",
+		Usage:       "Pass if input is a PDF file.\n",
+		Destination: &isPdf,
+	},
+	)
+
+	app.Flags = append(app.Flags, cli.IntFlag{
+		Name:        "pdf-page-number, pn",
+		Usage:       "When working on a PDF, set the page to process (first page is 0, not 1).\n",
+		Destination: &pdfPage,
 	},
 	)
 
@@ -42,6 +62,31 @@ func main() {
 				return errors.New("no input file provided. " + app.Name + " needs a file or data from STDIN")
 			}
 			filename = c.Args().Get(0)
+			if isPdf {
+				imgFileName := filepath.Join(os.TempDir(), fmt.Sprintf("%s_p%d.png", filepath.Base(filename), pdfPage))
+				imageFilePtr, err := os.Create(imgFileName)
+				if err != nil {
+					log.Fatal(err)
+				}
+				doc, err := fitz.New(filename)
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				img, err := doc.ImagePNG(pdfPage, 300.00)
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				err = os.WriteFile(imgFileName, img, 0644)
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				imageFilePtr.Close()
+				doc.Close()
+				filename = imgFileName
+			}
 			data, err := zaje.ReadDataFromFile(filename)
 			if err != nil {
 				log.Fatal(err)
