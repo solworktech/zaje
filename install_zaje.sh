@@ -47,25 +47,25 @@ GIT_BASE_DOMAIN="github.com"
 NAME="zaje"
 HIGHLIGHT_REPO_NAME="gohighlight"
 GH_SPACE="jessp01"
-LATEST_VER=$(curl -sL "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$NAME/releases/latest"| grep tag_name|sed 's@\s*"tag_name": "\(.*\)".*@\1@')
+LATEST_VER=$(curl -sL "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$NAME/releases/latest"|grep tag_name|sed 's@\s*"tag_name":\s*"\(.*\)".*@\1@'|xargs)
 OS=$(uname)
 ARCH=$(uname -m)
 BIN_ARCHIVE="zaje_${OS}_${ARCH}.tar.gz"
 
 # we need this for the lexers
-LATEST_HIGHLIGHT_VER=$(curl -sL "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$HIGHLIGHT_REPO_NAME/releases/latest"| grep tag_name|sed 's@\s*"tag_name": "\(.*\)".*@\1@')
+LATEST_HIGHLIGHT_VER=$(curl -sL "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$HIGHLIGHT_REPO_NAME/releases/latest"|grep tag_name|sed 's@\s*"tag_name": "\(.*\)".*@\1@'|xargs)
 HIGHLIGHT_SOURCE_ARCHIVE="${LATEST_HIGHLIGHT_VER}.tar.gz"
 
 CONFIG_DIR="$HOME/.config/$NAME"
 LEXERS_DIR="$CONFIG_DIR/syntax_files"
-TMP_DIR="/tmp/$NAME"
+TMP_DIR="/tmp/${NAME}_$(id -u)"
 FUNCTIONS_RC_FILE="$CONFIG_DIR/${NAME}_functions.rc"
 
 
 printf '%b' "${BOLD}${NORMAL}\nWelcome to ${BLUE}$NAME ($LATEST_VER)${NORMAL}'s installation script:)\n"
 
 mkdir -p "$CONFIG_DIR" "$TMP_DIR"
-cd $TMP_DIR
+cd "$TMP_DIR"
 
 printf '%b' "${NORMAL}Fetching sources...\n\n"
 curl -Ls "https://${GIT_BASE_DOMAIN}/$GH_SPACE/$NAME/releases/download/${LATEST_VER}/${BIN_ARCHIVE}" --output "${BIN_ARCHIVE}"
