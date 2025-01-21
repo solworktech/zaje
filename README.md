@@ -26,7 +26,7 @@ to very little effort.
     * The first line of text (so it will usually work nicely when piping as well)
 - Supports explicit specification of the lexer to use via a command-line arg and an `ENV` var
 - Easily to deploy: since it's a Go CLI app, it's one, statically linked executable with no dynamic deps
-- Easily extendable: see [Revising and adding new lexers](https://github.com/jessp01/gohighlight#revising-and-adding-new-lexers) for details
+- Easily extendable: see [Revising and adding new lexers](#adding-and-revising-lexers) for details
 
 ### Installation
 
@@ -106,18 +106,6 @@ $ super-zaje --pdf  --pdf-page-number 63 /local/path/to/FORTRAN_colouring_book.p
 Will convert page **64** (page numbers start from 0 in [go-fitz](https://github.com/gen2brain/go-fitz) which is used by
 super-zaje) to a PNG and pass that on to [gosseract](https://github.com/otiai10/gosseract) for text extraction.
 
-
-
-### ASCIInema screencast (Not a video!)
-
-You can copy all text (commands, outputs, etc) straight off the player:)
-
-[![super-zaje - extract and highlight text right off a remote image](https://asciinema.org/a/599719.svg)](https://asciinema.org/a/599719)
-
-[![zaje - a colouriser to cover all your shell needs](https://asciinema.org/a/597732.svg)](https://asciinema.org/a/597732)
-
-[![zaje - a colouriser to cover all your shell needs](https://asciinema.org/a/ltEfcN9sILkUFHruwQLn6rDXm.svg)](https://asciinema.org/a/ltEfcN9sILkUFHruwQLn6rDXm)
-
 ### Adding and revising lexers
 
 See [Revising and adding new lexers](https://github.com/jessp01/gohighlight#revising-and-adding-new-lexers).
@@ -138,6 +126,18 @@ preproc: will colour the char group bright red
 Specifying the colour names in the YML is also supported, see [df.yaml](https://github.com/jessp01/gohighlight/blob/master/syntax_files/df.yaml) for an example.
 
 If your new lexer doesn't seem to work, run `zaje` with `-d` or `--debug` to get more info.
+
+
+
+### ASCIInema screencast (Not a video!)
+
+You can copy all text (commands, outputs, etc) straight off the player:)
+
+[![super-zaje - extract and highlight text right off a remote image](https://asciinema.org/a/599719.svg)](https://asciinema.org/a/599719)
+
+[![zaje - a colouriser to cover all your shell needs](https://asciinema.org/a/597732.svg)](https://asciinema.org/a/597732)
+
+[![zaje - a colouriser to cover all your shell needs](https://asciinema.org/a/ltEfcN9sILkUFHruwQLn6rDXm.svg)](https://asciinema.org/a/ltEfcN9sILkUFHruwQLn6rDXm)
 
 ### Synopsis
 
