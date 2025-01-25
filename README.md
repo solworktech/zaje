@@ -14,11 +14,11 @@ Sounds good? Skip ahead to the [screencast section](#asciinema-screencast-not-a-
 Highlighting output in the shell is hardly a novel idea and its effectiveness is generally agreed to be high:)
 There are other tools that provide similar functionality, for instance `supercat` and `grc`. However, with this
 project, I was looking to create a tool that can effectively replace `cat`, `tail` and other traditional utils with zero
-to very little effort.
+to little effort.
 
 ### Features
 
-- Supports over a 100 lexers for programming languages, configuration and log formats and UNIX commands (this is done using the
+- Supports over a hundred lexers for programming languages, configuration and log formats and UNIX commands (this is done using the
   [highlight Go package](https://github.com/jessp01/gohighlight))
 - Can accept input as an argument as well as from an `STDIN` stream
 - Can detect the lexer to use based on:
