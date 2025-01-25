@@ -12,7 +12,7 @@ Sounds good? Skip ahead to the [screencast section](#asciinema-screencast-not-a-
 ## Motivation
 
 Highlighting output in the shell is hardly a novel idea and its effectiveness is generally agreed to be high:)
-There are other tools that provide similar functionality, for instance `supercat` and `grc`. However, with this
+There are other tools that provide similar functionality, for instance, `supercat` and `grc`. However, with this
 project, I was looking to create a tool that can effectively replace `cat`, `tail` and other traditional utils with zero
 to little effort.
 
@@ -78,7 +78,7 @@ your distro of choice do not have it, you can always compile it from source.
 $ brew install tesseract
 ```
 
-After installing `tesseract`, simply invoke the below to install `super-zaje`:
+After installing `tesseract`, invoke the below to install `super-zaje`:
 
 ```sh
 # install super-zaje
@@ -125,7 +125,7 @@ preproc: will colour the char group bright red
 ```
 Specifying the colour names in the YML is also supported, see [df.yaml](https://github.com/jessp01/gohighlight/blob/master/syntax_files/df.yaml) for an example.
 
-If your new lexer doesn't seem to work, run `zaje` with `-d` or `--debug` to get more info.
+If your new lexer doesn't work as expected, run `zaje` with `-d` or `--debug` to get more info.
 
 
 
