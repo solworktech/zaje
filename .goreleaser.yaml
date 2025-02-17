@@ -1,7 +1,9 @@
+---
 # This is an example .goreleaser.yml file with some sensible defaults.
 # Make sure to check the documentation at https://goreleaser.com
 before:
   hooks:
+    - git submodule update --remote  --init
     # You may remove this if you don't use go modules.
     - go mod tidy
     # you may remove this if you don't need go generate
@@ -34,7 +36,7 @@ builds:
 
 archives:
   - format: tar.gz
-    # this name template makes the OS and Arch compatible with the results of uname.
+    # this name template makes the OS and Arch compatible with `uname`.
     name_template: >-
       {{ .ProjectName }}_
       {{- title .Os }}_
@@ -53,6 +55,44 @@ changelog:
       - '^docs:'
       - '^test:'
 
+nfpms:
+  - file_name_template: "{{ .ConventionalFileName }}"
+    id: packages
+    homepage: https://github.com/solworktech/mdtopdf
+    description: |-
+      zaje is a syntax highlighter designed to cover your shell colouring needs.
+      It can act as an ad hoc replacement for cat and, with a spot of one-line
+      shell functions tail and other friends.
+    maintainer: Jesse Portnoy <jesse@packman.io>
+    license: MIT
+    vendor: Solworktech
+    bindir: /usr/bin
+    section: utils
+    contents:
+      - src: ./highlight/syntax_files
+        dst: /etc/{{ .PackageName }}/syntax_files
+        expand: true
+        file_info:
+          mode: 0755
+      - src: ./utils/functions.rc
+        dst: /etc/profile.d/{{ .PackageName }}.sh
+        expand: true
+        file_info:
+          mode: 0755
+      - src: ./LICENSE
+        dst: /usr/share/doc/{{ .PackageName }}/copyright
+        expand: true
+        file_info:
+          mode: 0644
+      - src: ./README.md
+        dst: /usr/share/doc/{{ .PackageName }}/
+        expand: true
+        file_info:
+          mode: 0644
+    formats:
+      - deb
+      - rpm
+      - archlinux
 # The lines beneath this are called `modelines`. See `:help modeline`
 # Feel free to remove those if you don't want/use them.
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
