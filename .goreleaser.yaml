@@ -8,6 +8,8 @@ before:
     - go mod tidy
     # you may remove this if you don't need go generate
     - go generate ./...
+    - go install github.com/cpuguy83/go-md2man@latest
+    - go-md2man -in zaje.1.md -out zaje.1.gz
 
 builds:
   - env: [CGO_ENABLED=0]
@@ -79,6 +81,11 @@ nfpms:
         expand: true
         file_info:
           mode: 0755
+      - src: ./{{ .PackageName }}.1.gz
+        dst: /usr/share/man/man1/
+        expand: true
+        file_info:
+          mode: 0644
       - src: ./LICENSE
         dst: /usr/share/doc/{{ .PackageName }}/copyright
         expand: true
