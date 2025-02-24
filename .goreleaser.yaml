@@ -35,9 +35,9 @@ builds:
 #    binary: super-zaje
 
 archives:
-  - format: tar.gz
+  - format: ['tar.gz']
     # this name template makes the OS and Arch compatible with `uname`.
-    name_template: >-
+    version_template: >-
       {{ .ProjectName }}_
       {{- title .Os }}_
       {{- if eq .Arch "amd64" }}x86_64
