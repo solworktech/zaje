@@ -2,7 +2,7 @@ zaje 1 "February 2025" zaje "User Manual"
 ==================================================
 
 `zaje` is a syntax highlighter that aims to cover all your shell colouring needs. 
-It can act as an ad hoc replacement for `cat` and, with a spot of one-line shell 
+It can act as an ad-hoc replacement for `cat` and, with a spot of one-line shell 
 functions `tail` and other friends.
 
 
@@ -16,7 +16,7 @@ and other traditional utils with zero to little effort.
 
 ## Features
 
-- Supports over a hundred lexers for programming languages, configuration and log formats and UNIX commands 
+- Supports over 100 lexers for programming languages, configuration and log formats and UNIX commands 
   (this is done using the [highlight Go package](https://github.com/jessp01/gohighlight))
 - Can accept input as an argument as well as from an `STDIN` stream
 - Can detect the lexer to use based on:
