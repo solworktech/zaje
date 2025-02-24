@@ -1,12 +1,14 @@
 zaje 1 "February 2025" zaje "User Manual"
 ==================================================
 
+## DESCRIPTION
+
 `zaje` is a syntax highlighter that aims to cover all your shell colouring needs. 
 It can act as an ad-hoc replacement for `cat` and, with a spot of one-line shell 
 functions `tail` and other friends.
 
 
-## Motivation
+## MOTIVATION
 
 Highlighting output in the shell is hardly a novel idea and its effectiveness 
 is generally agreed to be high:)
@@ -14,7 +16,7 @@ There are other tools that provide similar functionality, for instance, `superca
 However, with this project, I was looking to create a tool that can effectively replace `cat`, `tail` 
 and other traditional utils with zero to little effort.
 
-## Features
+## FEATURES
 
 - Supports over 100 lexers for programming languages, configuration and log formats and UNIX commands 
   (this is done using the [highlight Go package](https://github.com/jessp01/gohighlight))
@@ -26,7 +28,7 @@ and other traditional utils with zero to little effort.
 - Easily to deploy: since it's a Go CLI app, it's one, statically linked executable with no dynamic deps
 - Easily extendable: see [Revising and adding new lexers](#adding-and-revising-lexers) for details
 
-## Synopsis
+## SYNOPSIS
 
 ```yml
 NAME:
