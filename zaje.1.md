@@ -7,9 +7,6 @@ zaje 1 "February 2025" zaje "User Manual"
 It can act as an ad-hoc replacement for `cat` and, with a spot of one-line shell 
 functions `tail` and other friends.
 
-
-## MOTIVATION
-
 Highlighting output in the shell is hardly a novel idea and its effectiveness 
 is generally agreed to be high:)
 There are other tools that provide similar functionality, for instance, `supercat` and `grc`. 
@@ -30,13 +27,6 @@ and other traditional utils with zero to little effort.
 
 ## SYNOPSIS
 
-```yml
-NAME:
-   zaje - Syntax highlighter to cover all your shell needs
-
-USAGE:
-   zaje [global options] command [command options] [input-file || - ]
-   
 COMMANDS:
    help, h  Shows a list of commands or help for one command
 
@@ -56,21 +46,24 @@ GLOBAL OPTIONS:
    --print-version, -V  print only the version
 
    
-EXAMPLES:
+## EXAMPLES
+
 To use zaje as a cat replacement:
+```
 $ zaje /path/to/file
+```
 
 To replace tail -f:
-$ tail -f /path/to/file | zaje -l server-log -
-(- will make zaje read progressively from STDIN)
-
-AUTHOR:
-   Jesse Portnoy <jesse@packman.io>
-   
-COPYRIGHT:
-   (c) packman.io
-
 ```
+$ tail -f /path/to/file | zaje -l server-log -
+```
+
+(- will make zaje read progressively from STDIN)
+   
+## AUTHOR
+
+Jesse Portnoy <jesse@packman.io> 
+
 
 ## Adding and revising lexers
 
