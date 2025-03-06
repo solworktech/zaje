@@ -34,6 +34,15 @@ var Debug bool
 // AddLineNumbers prefix output with line numbers
 var AddLineNumbers bool
 
+// PrintVersion whether version info should be outputted
+var PrintVersion bool
+
+var (
+	version = "dev"
+	commit  = "none"
+	date    = "unknown"
+)
+
 // RemoveLineNumbers useful when working on an image input
 var RemoveLineNumbers bool
 
@@ -70,6 +79,7 @@ COPYRIGHT:
 `
 	app.Usage = "Syntax highlighter to cover all your shell needs"
 	app.Version = "0.21.19"
+	version = app.Version
 	app.EnableBashCompletion = true
 	cli.VersionFlag = cli.BoolFlag{
 		Name:  "print-version, V",
@@ -109,6 +119,11 @@ COPYRIGHT:
 			Usage:       "Add line numbers.\n",
 			Destination: &AddLineNumbers,
 		},
+		cli.BoolFlag{
+			Name:        "version, v",
+			Usage:       "Print version.\n",
+			Destination: &PrintVersion,
+		},
 	}
 }
 
@@ -118,6 +133,11 @@ func printDebugInfo() {
 	fmt.Println("Lexer: " + HighlightLexer)
 	fmt.Println("DEFINITIONS:")
 	fmt.Println(def)
+}
+
+// PrintVersionInfo outputs version info
+func PrintVersionInfo() {
+	fmt.Printf("md2pdf version: %s, commit: %s, built on: %s\n", version, commit, date)
 }
 
 // NullifyDef this is only needed for the test in `zaje_test.go`
@@ -166,6 +186,10 @@ func getDefs(filename string, data []byte) []highlight.LineMatch {
 		if len(warnings) > 0 {
 			fmt.Println(warnings)
 		}
+	}
+
+	if PrintVersion {
+		PrintVersionInfo()
 	}
 
 	if def == nil {
