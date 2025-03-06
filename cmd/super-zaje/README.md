@@ -94,6 +94,7 @@ GLOBAL OPTIONS:
 
    --print-version, -V  print only the version
 
+   --build-info, --bi  Print build info.
    
 EXAMPLES:
 To use super-zaje as a cat replacement:

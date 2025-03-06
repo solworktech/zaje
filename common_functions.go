@@ -34,8 +34,8 @@ var Debug bool
 // AddLineNumbers prefix output with line numbers
 var AddLineNumbers bool
 
-// PrintVersion whether version info should be outputted
-var PrintVersion bool
+// BuildInfo whether build info should be outputted
+var BuildInfo bool
 
 var (
 	version = "dev"
@@ -120,9 +120,9 @@ COPYRIGHT:
 			Destination: &AddLineNumbers,
 		},
 		cli.BoolFlag{
-			Name:        "version, v",
-			Usage:       "Print version.\n",
-			Destination: &PrintVersion,
+			Name:        "build-info, bi",
+			Usage:       "Print build info.\n",
+			Destination: &BuildInfo,
 		},
 	}
 }
@@ -135,9 +135,9 @@ func printDebugInfo() {
 	fmt.Println(def)
 }
 
-// PrintVersionInfo outputs version info
-func PrintVersionInfo() {
-	fmt.Printf("md2pdf version: %s, commit: %s, built on: %s\n", version, commit, date)
+// PrintBuildInfo outputs version info
+func PrintBuildInfo() {
+	fmt.Printf("md2pdf version: %s, commit: %s, built at: %s\n", version, commit, date)
 }
 
 // NullifyDef this is only needed for the test in `zaje_test.go`
@@ -148,13 +148,11 @@ func NullifyDef() {
 func getDefs(filename string, data []byte) []highlight.LineMatch {
 
 	if SynDir == "" {
-		if SynDir == "" {
-			if stat, err := os.Stat(userSynDir); err == nil && stat.IsDir() {
-				SynDir = userSynDir
-			} else {
-				if stat, err := os.Stat(globalSynDir); err == nil && stat.IsDir() {
-					SynDir = globalSynDir
-				}
+		if stat, err := os.Stat(userSynDir); err == nil && stat.IsDir() {
+			SynDir = userSynDir
+		} else {
+			if stat, err := os.Stat(globalSynDir); err == nil && stat.IsDir() {
+				SynDir = globalSynDir
 			}
 		}
 	}
@@ -188,8 +186,8 @@ func getDefs(filename string, data []byte) []highlight.LineMatch {
 		}
 	}
 
-	if PrintVersion {
-		PrintVersionInfo()
+	if BuildInfo {
+		PrintBuildInfo()
 	}
 
 	if def == nil {

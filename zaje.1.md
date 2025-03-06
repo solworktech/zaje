@@ -45,6 +45,7 @@ GLOBAL OPTIONS:
 
    --print-version, -V  print only the version
 
+   --build-info, --bi  Print build info.
    
 ## EXAMPLES
 

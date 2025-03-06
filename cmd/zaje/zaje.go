@@ -28,7 +28,7 @@ func main() {
 		var filename string
 
 		if fi.Mode()&os.ModeNamedPipe == 0 {
-			if !zaje.PrintVersion && c.NArg() < 1 {
+			if !zaje.BuildInfo && c.NArg() < 1 {
 				return errors.New("no input file provided. " + app.Name + " needs a file or data from STDIN")
 			}
 			filename = c.Args().Get(0)
