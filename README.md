@@ -123,7 +123,7 @@ comment: high.green will colour the char group bright green
 preproc: will colour the char group bright red
 
 ```
-Specifying the colour names in the YML is also supported, see [df.yaml](https://github.com/jessp01/gohighlight/blob/master/syntax_files/df.yaml) for an example.
+Specifying the colour names in the YAML is also supported, see [df.yaml](https://github.com/jessp01/gohighlight/blob/master/syntax_files/df.yaml) for an example.
 
 If your new lexer doesn't work as expected, run `zaje` with `-d` or `--debug` to get more info.
 
