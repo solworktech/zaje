@@ -30,7 +30,8 @@ to little effort.
 
 ### Installation
 
-Because `zaje` depends on lexers from the `gohighlight` package and also provides some [helper shell
+If you're running a Debian or RPM based distro, the easiest way to install is by obtaining the packages from the [latest
+release](https://github.com/solworktech/zaje/releases); otherwise, because `zaje` depends on lexers from the `gohighlight` package and also provides some [helper shell
 functions](./utils/functions.rc), I've created [install\_zaje.sh](./install_zaje.sh) to handle its deployment.
 
 This is a shell script and does not require Go to be installed. Simply download and invoke with no arguments:
