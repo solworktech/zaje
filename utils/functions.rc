@@ -137,6 +137,16 @@ if command -v zaje > /dev/null 2>&1 ; then
 	$(which apt-cache) "$@"  | zaje -l apt
     }
 
+    rpmlint()
+    {
+	BIN="rpmlint"
+	if which $BIN > /dev/null ;then
+		$(which $BIN --skip-alias --skip-functions) "$@" 2>&1 | zaje -l $BIN
+	else
+	    echo "$BIN does not exist"
+	fi
+    }
+
 else
     echo "Couldn't find zaje. Exiting without sourcing functions"
 fi
