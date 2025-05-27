@@ -50,7 +50,7 @@ GH_SPACE="jessp01"
 LATEST_VER=$(curl -sL "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$NAME/releases/latest"|grep tag_name|sed 's@\s*"tag_name":\s*"\(.*\)".*@\1@'|xargs)
 OS=$(uname)
 ARCH=$(uname -m)
-BIN_ARCHIVE="zaje_${OS}_${ARCH}.tar.gz"
+BIN_ARCHIVE="${NAME}_${OS}_${ARCH}.tar.gz"
 
 # we need this for the lexers
 LATEST_HIGHLIGHT_VER=$(curl -sL "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$HIGHLIGHT_REPO_NAME/releases/latest"|grep tag_name|sed 's@\s*"tag_name": "\(.*\)".*@\1@'|xargs)
@@ -111,8 +111,8 @@ if [ "$(id -u)" = 0 ];then
 # shellcheck disable=SC2059
     printf "Copied ${BLUE}~/bin/${NAME}${NORMAL} to ${BLUE}/usr/local/bin/${NAME}${NORMAL}\n"
     # we don't want to override if exists
-    if [ ! -r /etc/profile.d/zaje.sh ];then
-	cp "$FUNCTIONS_RC_FILE" /etc/profile.d/zaje.sh
+    if [ ! -r /etc/profile.d/${NAME}.sh ];then
+	cp "$FUNCTIONS_RC_FILE" /etc/profile.d/${NAME}.sh
 # shellcheck disable=SC2059
 	printf "Copied ${BLUE}$FUNCTIONS_RC_FILE${NORMAL} to ${BLUE}/etc/profile.d/${NAME}.sh${NORMAL}\n"
     fi
