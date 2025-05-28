@@ -13,6 +13,6 @@ repos:
   - repo: https://github.com/crate-ci/typos
     rev: typos-v0.7.4
     hooks:
-    - id: typos
-      exclude_types: [yaml]
-      exclude: go.*
+      - id: typos
+        exclude_types: [yaml]
+        exclude: go.*
