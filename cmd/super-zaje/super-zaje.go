@@ -94,8 +94,11 @@ func main() {
 
 			mimeType := http.DetectContentType(data)
 			if strings.HasPrefix(mimeType, "image") {
-				imgDestination := os.TempDir() + "/" + filepath.Base(filename)
-				zaje.DownloadFile(filename, imgDestination)
+				imgDestination := filename
+				if _, err := os.Stat(filename); errors.Is(err, os.ErrNotExist) {
+					imgDestination = os.TempDir() + "/" + filepath.Base(filename)
+					zaje.DownloadFile(filename, imgDestination)
+				}
 				client := gosseract.NewClient()
 				defer client.Close()
 
