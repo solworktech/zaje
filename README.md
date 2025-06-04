@@ -65,7 +65,7 @@ depends on `libtesseract` and requires its SOs to be available on the machine.
 
 First, install `zaje` using [install_zaje.sh](https://github.com/jessp01/zaje/blob/master/install_zaje.sh), and then...
 
-#### Installing on Debian/Ubuntu
+#### Installing deps on Debian/Ubuntu
 ```sh
 # install deps:
 $ sudo apt-get install -y libtesseract-dev libleptonica-dev tesseract-ocr-eng golang-go
@@ -74,7 +74,7 @@ $ sudo apt-get install -y libtesseract-dev libleptonica-dev tesseract-ocr-eng go
 Most popular Linux distros include the `libtesseract` package but it may be named differently. If the official repos of
 your distro of choice do not have it, you can always compile it from source.
 
-#### Installing on Darwin (what people mistakenly refer to as MacOS)
+#### Installing deps on Darwin (what people mistakenly refer to as MacOS)
 ```sh
 $ brew install tesseract
 ```
