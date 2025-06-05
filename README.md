@@ -67,8 +67,12 @@ First, install `zaje` using [install_zaje.sh](https://github.com/jessp01/zaje/bl
 
 #### Installing deps on Debian/Ubuntu
 ```sh
-# install deps:
-$ sudo apt-get install -y libtesseract-dev libleptonica-dev tesseract-ocr-eng golang-go
+# apt-get install -y libtesseract-dev libleptonica-dev tesseract-ocr-eng golang-go
+```
+
+#### Installing deps on RHEL and clones
+```sh
+# yum install -y tesseract-devel leptonica-devel golang
 ```
 
 Most popular Linux distros include the `libtesseract` package but it may be named differently. If the official repos of
