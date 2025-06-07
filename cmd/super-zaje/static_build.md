@@ -45,5 +45,5 @@ CGO_ENABLED=1 GOOS=linux go build  -a -tags netgo -ldflags \
  '-extldflags "-static -ldeflate -ltiff -L/usr/local/lib -ldeflate -lsharpyuv -lwebp -lLerc -llzma -ljbig -ltesseract -lleptonica -lpng -lzstd -ljpeg -lz -lgif -lsharpyuv -lwebp"' super-zaje.go
 ```
 
-**Note: to run `super-zaje` on your target machines, you will need to copy `/usr/local/share/tessdata` from the build machine.
+**Note: to run `super-zaje` on your target machines, you will need to copy [eng.traineddata](https://github.com/tesseract-ocr/tessdata/raw/refs/heads/main/eng.traineddata) to `/usr/local/share/tessdata`.
 You can also set the `TESSDATA_PREFIX` ENV dir if you wish to copy it to a different location.**

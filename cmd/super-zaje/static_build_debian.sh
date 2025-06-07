@@ -27,6 +27,8 @@ cd tesseract
 --disable-openmp --without-curl --without-archive --disable-doc \
 'CXXFLAGS=-DTESS_EXPORTS -g0 -O3 -ffast-math' 
 make && make install
+wget -q https://github.com/tesseract-ocr/tessdata/raw/refs/heads/main/eng.traineddata -P /usr/local/share/tessdata
+
 
 cd "$TMPDIR"
 
