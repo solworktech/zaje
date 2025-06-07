@@ -53,6 +53,10 @@ For example, try:
 $ ~/go/bin/super-zaje "https://github.com/jessp01/zaje/blob/master/testimg/go1.png?raw=true"
 ```
 
+##### Static Build
+
+See this [doc](./static_build.md).
+
 ### PDF inputs
 
 PDF files are also supported. For example:
