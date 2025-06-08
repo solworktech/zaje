@@ -33,7 +33,7 @@ wget -q https://github.com/tesseract-ocr/tessdata/raw/refs/heads/main/eng.traine
 cd "$TMPDIR"
 
 BIN_NAME=super-zaje
-git clone https://github.com/jessp01/zaje.git 
+git clone https://github.com/jessp01/zaje.git --recursive 
 cd zaje/cmd/super-zaje  
 CGO_ENABLED=1 GOOS=linux go build  -a -tags netgo -ldflags \
     '-extldflags "-static -ldeflate -ltiff -L/usr/local/lib -ldeflate -lsharpyuv -lwebp -lLerc -llzma -ljbig -ltesseract -lleptonica -lpng -lzstd -ljpeg -lz -lgif -lsharpyuv -lwebp"' super-zaje.go
