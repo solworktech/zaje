@@ -43,5 +43,4 @@ jobs:
         env:
           TERM: term-256color
         run: |
-          set -x
-          sudo ./cmd/super-zaje/static_build_debian.sh
+          sudo bash -x ./cmd/super-zaje/static_build_debian.sh
