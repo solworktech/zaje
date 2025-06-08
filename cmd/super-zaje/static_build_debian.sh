@@ -6,7 +6,7 @@ if [ "$(id -u)" != 0 ];then
 fi
 
 apt-get -U -y -q install libdeflate-dev libtiff-dev libsharpyuv-dev libwebp-dev libgif-dev \
-  liblerc-dev liblzma-dev libjbig-dev libpng-dev libzstd-dev libjpeg-dev build-essential
+  liblerc-dev liblzma-dev libjbig-dev libpng-dev libzstd-dev libjpeg-dev build-essential strace
 
 TMPDIR=$(mktemp -d --suffix=_super-zaje)
 
@@ -43,6 +43,6 @@ echo "Let's make sure we got a static binary..."
 ldd $BIN_NAME
 
 echo "Okay, now let's test it..."
-./$BIN_NAME "https://github.com/jessp01/zaje/blob/master/testimg/go1.png?raw=true"
-
+strace ./$BIN_NAME "https://github.com/jessp01/zaje/blob/master/testimg/go1.png?raw=true"
+echo $?
 echo "Great. Remember to copy /usr/local/share/tessdata to your target machine." 
