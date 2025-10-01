@@ -25,7 +25,7 @@ to little effort.
     * The file name (when acting in `cat` mode)
     * The first line of text (so it will usually work nicely when piping as well)
 - Supports explicit specification of the lexer to use via a command-line arg and an `ENV` var
-- Easily to deploy: since it's a Go CLI app, it's one, statically linked executable with no dynamic deps
+- Easy to deploy: since it's a Go CLI app, it's one, statically linked executable with no dynamic deps
 - Easily extendable: see [Revising and adding new lexers](#adding-and-revising-lexers) for details
 
 ### Installation
