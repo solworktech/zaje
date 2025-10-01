@@ -42,3 +42,8 @@ jobs:
           pre-commit run --all-files
           go test -v
           sudo ./install_zaje.sh
+      - name: Test super-zaje
+        env:
+          TERM: term-256color
+        run: |
+          sudo bash -x ./cmd/super-zaje/static_build_debian.sh
