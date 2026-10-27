@@ -38,6 +38,7 @@ This is a shell script and does not require Go to be installed. Simply download 
 
 ```sh
 $ curl https://raw.githubusercontent.com/jessp01/zaje/master/install_zaje.sh > install_zaje.sh
+$ chmod +x ./install_zaje.sh
 $ ./install_zaje.sh
 ```
 

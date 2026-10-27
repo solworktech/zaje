@@ -1,5 +1,6 @@
-#!/bin/sh -e
+#!/bin/sh
 
+set -e
 log_use_fancy_output () { 
     TPUT=/usr/bin/tput
     EXPR=/usr/bin/expr
