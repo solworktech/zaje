@@ -47,13 +47,27 @@ GIT_BASE_DOMAIN="github.com"
 NAME="zaje"
 HIGHLIGHT_REPO_NAME="gohighlight"
 GH_SPACE="jessp01"
-LATEST_VER=$(curl -sL "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$NAME/releases/latest"|grep tag_name|sed 's@\s*"tag_name":\s*"\(.*\)".*@\1@'|xargs)
+LATEST_VER=$(curl -sL "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$NAME/releases/latest" \
+  | grep tag_name \
+  | sed 's@[[:space:]]*"tag_name":[[:space:]]*"\(.*\)".*@\1@' \
+  | xargs)
 OS=$(uname)
-ARCH=$(uname -m)
+case "$(uname -m)" in
+  x86_64|amd64)        ARCH=x86_64 ;;
+  aarch64|arm64)       ARCH=arm64 ;;
+  i386|i486|i586|i686) ARCH=i386 ;;
+  armv7*)              ARCH=armv7 ;;
+  armv6*)              ARCH=armv6 ;;
+  *) echo "unsupported architecture: $(uname -m)" >&2; exit 1 ;;
+esac
+
 BIN_ARCHIVE="${NAME}_${OS}_${ARCH}.tar.gz"
 
 # we need this for the lexers
-LATEST_HIGHLIGHT_VER=$(curl -sL "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$HIGHLIGHT_REPO_NAME/releases/latest"|grep tag_name|sed 's@\s*"tag_name": "\(.*\)".*@\1@'|xargs)
+LATEST_HIGHLIGHT_VER=$(curl -sL "https://api.${GIT_BASE_DOMAIN}/repos/$GH_SPACE/$HIGHLIGHT_REPO_NAME/releases/latest" \
+  | grep tag_name \
+  | sed 's@[[:space:]]*"tag_name":[[:space:]]*"\(.*\)".*@\1@' \
+  | xargs)
 HIGHLIGHT_SOURCE_ARCHIVE="${LATEST_HIGHLIGHT_VER}.tar.gz"
 
 CONFIG_DIR="$HOME/.config/$NAME"
