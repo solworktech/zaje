@@ -1,42 +1,49 @@
 #!/bin/sh
 
 set -e
-log_use_fancy_output () { 
-    TPUT=/usr/bin/tput
-    EXPR=/usr/bin/expr
-    if  [ -t 1 ] && 
-        [ "x${TERM:-}" != "x" ] && 
-        [ "x${TERM:-}" != "xdumb" ] && 
-        [ -x $TPUT ] && [ -x $EXPR ] && 
-        $TPUT hpa 60 >/dev/null 2>&1 &&
-        $TPUT setaf 1 >/dev/null 2>&1 
-    then
-# shellcheck disable=SC2015
-        [ -z "$FANCYTTY" ] && FANCYTTY=1 || true 
-    else 
-        FANCYTTY=0
-    fi   
+log_use_fancy_output () {
+    TPUT_STYLE=
+    if [ -t 1 ] && [ -z "${NO_COLOR:-}" ] &&
+       [ -n "${TERM:-}" ] && [ "$TERM" != "dumb" ]; then
+        if tput setaf 1 >/dev/null 2>&1; then
+            TPUT_STYLE=terminfo
+        elif tput AF 1 >/dev/null 2>&1; then
+            TPUT_STYLE=termcap
+        fi
+    fi
+
+    # an explicit FANCYTTY from the caller wins; otherwise colours are on if tput works
+    if [ -z "${FANCYTTY:-}" ]; then
+        if [ -n "$TPUT_STYLE" ]; then FANCYTTY=1; else FANCYTTY=0; fi
+    fi
+
     case "$FANCYTTY" in
-        1|Y|yes|true)   true;;
-        *)              false;;
-    esac 
+        1|Y|yes|true) return 0 ;;
+        *)            return 1 ;;
+    esac
 }
 
-# Only do the fancy stuff if we have an appropriate terminal
-# and if /usr is already mounted
-RED=''
-YELLOW=''
-BLUE=''
-NORMAL=''
-BOLD=''
-UNSET=''
+# _cap <terminfo name> [args]: runs tput with the name that this system understands
+_cap () {
+    _cap_name=$1; shift
+    if [ "$TPUT_STYLE" = termcap ]; then
+        case "$_cap_name" in
+            setaf) _cap_name=AF ;;   # foreground colour
+            bold)  _cap_name=md ;;
+            sgr0)  _cap_name=me ;;   # all attributes off
+            op)    _cap_name=op ;;   # original colour pair (same in both)
+        esac
+    fi
+    tput "$_cap_name" "$@"
+}
+
 if log_use_fancy_output; then
-    RED=$( $TPUT setaf 1)
-    YELLOW=$( $TPUT setaf 3)
-    BLUE=$( $TPUT setaf 6)
-    NORMAL=$( $TPUT setaf 2)
-    BOLD=$($TPUT bold)
-    UNSET=$( $TPUT op)
+    RED=$(_cap setaf 1)
+    YELLOW=$(_cap setaf 3)
+    BLUE=$(_cap setaf 6)
+    NORMAL=$(_cap setaf 2)
+    BOLD=$(_cap bold)
+    UNSET=$(_cap op)
 fi
 
 if [ ! "$(which curl 2>/dev/null)" ];then
@@ -146,10 +153,6 @@ ping localhost -c1
 printf "\n${YELLOW}hello.c:${NORMAL}\n"
 printf "#include <stdio.h>\nprintf(\"hello world\");\n" | zaje
 
-if log_use_fancy_output ;then
-    $TPUT sgr0
-fi
-
 if [ "$(id -u)" = 0 ];then
     cp ~/bin/${NAME} /usr/local/bin/${NAME}
 # shellcheck disable=SC2059
@@ -169,3 +172,8 @@ if [ "$(id -u)" = 0 ];then
 else
 	printf "Add the below to shell's RC (~/.bashrc, ~/.profile, etc):\n===\n%s. %s\nPATH=\$PATH:~/bin\n%s===\n" "${BLUE}" "${FUNCTIONS_RC_FILE}" "${NORMAL}"
 fi
+
+if log_use_fancy_output ;then
+    _cap sgr0
+fi
+
